@@ -2,56 +2,44 @@ package com.ingrid.mundoanimal.activities;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.ingrid.mundoanimal.R;
-import com.ingrid.mundoanimal.adapters.TabsAdapter;
+import com.ingrid.mundoanimal.fragments.main.MainFragment;
 
-public class MainActivity extends FragmentActivity {
-
-    private ViewPager2 viewPager;
-    private TabsAdapter tabsAdapter;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
     }
 
     private void init() {
-        initTabs();
-        initNavController();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        toggle.syncState();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragments_container, new MainFragment())
+                .commit();
     }
 
-    private void initTabs() {
-        tabsAdapter = new TabsAdapter(this);
-        viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(tabsAdapter);
-
-
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> {
-                    if (position == 0) {
-                        tab.setText("Início");
-                        tab.setIcon(R.drawable.home);
-                    } else if (position == 1) {
-                        tab.setText("Produtos");
-                        tab.setIcon(R.drawable.products);
-                    } else {
-                        tab.setText("Serviços");
-                        tab.setIcon(R.drawable.service1);
-                    }
-                }
-        ).attach();
-    }
-
-    private void initNavController() {
-
-    }
 }
