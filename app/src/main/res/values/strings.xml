@@ -8,4 +8,5 @@
     <string name="tab_text_home">Início</string>
     <string name="tab_text_products">Produtos</string>
     <string name="tab_text_services">Serviços</string>
+    <string name="menu_help">Ajuda</string>
 </resources>
