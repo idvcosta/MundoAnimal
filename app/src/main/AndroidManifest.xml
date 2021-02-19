@@ -19,8 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/Theme.MundoAnimal.NoActionBar"/>
+            android:name=".activities.MainActivity" android:theme="@style/Theme.MundoAnimal.NoActionBar"/>
+
+        <activity android:name=".activities.HelpActivity"/>
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.ProfileActivity" android:label="@string/menu_profile" />
     </application>
 
 </manifest>
