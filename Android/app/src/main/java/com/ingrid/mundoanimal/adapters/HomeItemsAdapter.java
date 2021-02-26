@@ -43,7 +43,7 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
     public void onBindViewHolder(@NonNull HomeItemHolder holder, int position) {
         HomeItem homeItem = homeItems.get(position);
 
-        holder.tvTitle.setText(homeItem.getTitle());
+        holder.tvTitle.setText(homeItem.getName());
         holder.tvPrice.setText(homeItem.getPrice());
     }
 

@@ -11,11 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ingrid.mundoanimal.R;
 import com.ingrid.mundoanimal.adapters.HomeItemsAdapter;
+import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 public class HomeFragment extends Fragment {
     private SearchView seach;
@@ -30,7 +32,14 @@ public class HomeFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                MundoAnimalRepository repository = new MundoAnimalRepository(requireContext());
+                return (T) new HomeViewModel(repository);
+            }
+        }).get(HomeViewModel.class);
 
         seach = view.findViewById(R.id.search);
         progressBar = view.findViewById(R.id.progressBar);

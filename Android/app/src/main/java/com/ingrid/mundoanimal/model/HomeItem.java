@@ -1,16 +1,16 @@
 package com.ingrid.mundoanimal.model;
 
 public class HomeItem {
-    private String title;
+    private String name;
     private String price;
 
-    public HomeItem(String title, String price){
-        this.title = title;
+    public HomeItem(String name, String price){
+        this.name = name;
         this.price = price;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public String getPrice() {

@@ -1,54 +1,60 @@
 package com.ingrid.mundoanimal.fragments.home;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.ingrid.mundoanimal.model.HomeData;
 import com.ingrid.mundoanimal.model.HomeItem;
+import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeViewModel extends ViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<HomeStates> mutableState;
     private MutableLiveData<List<HomeItem>> mutableItems;
+    private MundoAnimalRepository repository;
 
-    public HomeViewModel() {
+    public HomeViewModel(MundoAnimalRepository repository) {
+        this.repository = repository;
         mutableState = new MutableLiveData<>();
         mutableState.setValue(HomeStates.LOADING_INITIAL_DATA);
 
         mutableItems = new MutableLiveData<>();
 
-        mock();
+        loadData();
     }
 
-    private void mock() {
-        new Thread() {
+    private void loadData() {
+        repository.loadHome(new Callback<HomeData>() {
             @Override
-            public void run() {
-                try {
-                    sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                mutableState.postValue(HomeStates.INITIAL_DATA_LOADED);
+            public void onResponse(Call<HomeData> call, Response<HomeData> response) {
+                HomeData homeData = response.body();
 
-                List<HomeItem> listItems = new ArrayList<>();
-                listItems.add(new HomeItem("Coleira", "R$ 15"));
-                listItems.add(new HomeItem("Ração", "R$ 35"));
-                listItems.add(new HomeItem("Banho", "R$ 40"));
-                mutableItems.postValue(listItems);
+                mutableState.postValue(HomeStates.INITIAL_DATA_LOADED);
+                mutableItems.postValue(homeData.getProducts());
             }
-        }.start();
+
+            @Override
+            public void onFailure(Call<HomeData> call, Throwable cause) {
+                Log.e("HomeViewModel", "erro loading HomeData", cause);
+            }
+        });
     }
 
     public LiveData<HomeStates> getState() {
         return mutableState;
     }
 
-    public MutableLiveData<List<HomeItem>> getItems(){
+    public MutableLiveData<List<HomeItem>> getItems() {
         return mutableItems;
     }
 }
