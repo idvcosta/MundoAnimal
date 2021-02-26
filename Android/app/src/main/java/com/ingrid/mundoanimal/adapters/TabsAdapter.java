@@ -1,13 +1,11 @@
 package com.ingrid.mundoanimal.adapters;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.ingrid.mundoanimal.fragments.HomeFragment;
+import com.ingrid.mundoanimal.fragments.home.HomeFragment;
 import com.ingrid.mundoanimal.fragments.ProductsFragment;
 import com.ingrid.mundoanimal.fragments.ServicesFragment;
 

@@ -9,4 +9,6 @@
     <string name="tab_text_products">Produtos</string>
     <string name="tab_text_services">Serviços</string>
     <string name="menu_help">Ajuda</string>
+    <string name="hint_search">Pesquisa rápida</string>
+    <string name="status_loading">Carregando...</string>
 </resources>
