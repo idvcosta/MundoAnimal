@@ -4,6 +4,8 @@ const express = require('express');
 const manager = require('./mundo_animal_manager');
 const app = express();
 
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });

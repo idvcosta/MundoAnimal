@@ -3,11 +3,13 @@ package com.ingrid.mundoanimal.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ingrid.mundoanimal.R;
 import com.ingrid.mundoanimal.model.HomeItem;
 
@@ -19,12 +21,14 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
         private final TextView tvTitle;
         private final TextView tvPrice;
+        private final ImageView ivItem;
 
         public HomeItemHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvPrice = itemView.findViewById(R.id.tvPrice);
+            ivItem = itemView.findViewById(R.id.ivItem);
         }
     }
 
@@ -45,6 +49,12 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
         holder.tvTitle.setText(homeItem.getName());
         holder.tvPrice.setText(homeItem.getPrice());
+        //////////////////
+        Glide
+                .with(holder.itemView.getContext())
+                .load("https://mundo-animal-server.appspot.com/"+ homeItem.getImage())
+                .into(holder.ivItem);
+
     }
 
     @Override

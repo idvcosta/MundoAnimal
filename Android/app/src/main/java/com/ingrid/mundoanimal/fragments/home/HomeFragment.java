@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.ingrid.mundoanimal.R;
 import com.ingrid.mundoanimal.adapters.HomeItemsAdapter;
@@ -25,6 +26,7 @@ public class HomeFragment extends Fragment {
     private TextView tvStatus;
     private RecyclerView rvItems;
     private HomeViewModel homeViewModel;
+    private ViewPager2 vpHighlights;
 
     @Nullable
     @Override
@@ -45,6 +47,7 @@ public class HomeFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         tvStatus = view.findViewById(R.id.tvStatus);
         rvItems = view.findViewById(R.id.rvItems);
+        vpHighlights = view.findViewById(R.id.vpHighlights);
 
         initObserves();
 

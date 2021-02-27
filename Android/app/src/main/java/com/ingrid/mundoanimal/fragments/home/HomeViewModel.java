@@ -10,7 +10,6 @@ import com.ingrid.mundoanimal.model.HomeData;
 import com.ingrid.mundoanimal.model.HomeItem;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,7 +39,7 @@ public class HomeViewModel extends ViewModel {
                 HomeData homeData = response.body();
 
                 mutableState.postValue(HomeStates.INITIAL_DATA_LOADED);
-                mutableItems.postValue(homeData.getProducts());
+                mutableItems.postValue(homeData.getMostWanted());
             }
 
             @Override
