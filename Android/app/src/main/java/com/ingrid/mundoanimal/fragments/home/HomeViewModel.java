@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.ingrid.mundoanimal.model.HighlightItem;
 import com.ingrid.mundoanimal.model.HomeData;
-import com.ingrid.mundoanimal.model.HomeItem;
+import com.ingrid.mundoanimal.model.MostWantedItem;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 import java.util.List;
@@ -18,16 +19,18 @@ import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<HomeStates> mutableState;
-    private MutableLiveData<List<HomeItem>> mutableItems;
+    private MutableLiveData<FragmentStates> mutableState;
+    private MutableLiveData<List<MostWantedItem>> mutableMostWanted;
+    private MutableLiveData<List<HighlightItem>> mutableHighlight;
     private MundoAnimalRepository repository;
 
     public HomeViewModel(MundoAnimalRepository repository) {
         this.repository = repository;
         mutableState = new MutableLiveData<>();
-        mutableState.setValue(HomeStates.LOADING_INITIAL_DATA);
+        mutableMostWanted = new MutableLiveData<>();
+        mutableHighlight = new MutableLiveData<>();
 
-        mutableItems = new MutableLiveData<>();
+        mutableState.setValue(FragmentStates.LOADING_INITIAL_DATA);
 
         loadData();
     }
@@ -38,22 +41,28 @@ public class HomeViewModel extends ViewModel {
             public void onResponse(Call<HomeData> call, Response<HomeData> response) {
                 HomeData homeData = response.body();
 
-                mutableState.postValue(HomeStates.INITIAL_DATA_LOADED);
-                mutableItems.postValue(homeData.getMostWanted());
+                mutableState.postValue(FragmentStates.INITIAL_DATA_LOADED);
+                mutableMostWanted.postValue(homeData.getMostWanted());
+                mutableHighlight.postValue(homeData.getHighlights());
             }
 
             @Override
             public void onFailure(Call<HomeData> call, Throwable cause) {
                 Log.e("HomeViewModel", "erro loading HomeData", cause);
+                mutableState.postValue(FragmentStates.LOAD_INITIAL_DATA_ERROR);
             }
         });
     }
 
-    public LiveData<HomeStates> getState() {
+    public LiveData<FragmentStates> getState() {
         return mutableState;
     }
 
-    public MutableLiveData<List<HomeItem>> getItems() {
-        return mutableItems;
+    public MutableLiveData<List<MostWantedItem>> getMostWanted() {
+        return mutableMostWanted;
+    }
+
+    public MutableLiveData<List<HighlightItem>> getHightlight(){
+        return mutableHighlight;
     }
 }

@@ -14,6 +14,22 @@ app.get('/home', (req, res) => {
     res.send(manager.createHomeData());
 });
 
+app.get('/productsCategories', (req,res) => {
+	res.send(manager.getProductsCategories());
+});
+
+//productsByCategory?categoryId=10
+app.get('/productsByCategory', (req,res) => {
+	var id = req.query.categoryId;
+	res.send(manager.getProducts(id));
+});
+
+//product?id=4172
+app.get('/product', (req,res) => {
+	var id = req.query.id;
+	res.send(manager.getProduct(id));
+});
+
 // Start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

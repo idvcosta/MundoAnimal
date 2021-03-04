@@ -3,14 +3,14 @@ package com.ingrid.mundoanimal.model;
 import java.util.List;
 
 public class HomeData {
-    private List<HomeItem> mostWanted;
-    private  List<HighlightItem> highlights;
+    private List<MostWantedItem> mostWanted;
+    private List<HighlightItem> highlights;
 
-    public List<HomeItem> getMostWanted() {
+    public List<MostWantedItem> getMostWanted() {
         return mostWanted;
     }
 
-    public void setMostWanted(List<HomeItem> mostWanted) {
+    public void setMostWanted(List<MostWantedItem> mostWanted) {
         this.mostWanted = mostWanted;
     }
 

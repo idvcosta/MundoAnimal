@@ -14,6 +14,13 @@ function createHighlight( type, title, id){
 	};
 }
 
+const productsCategories = [
+	{id: 1, name: "Alimentos"},
+	{id: 2, name: "Petiscos"},
+	{id: 3, name: "Acessórios"},
+	{id: 4, name: "Farmácia"}
+];
+
 const HighlightTypes = {
 	NEWS:1,
 	SALE:2,
@@ -35,7 +42,10 @@ const home = {
 const manager = {
     createHomeData: function () {
         return home;
-    }
+    },
+	getProductsCategories: function() {
+		return productsCategories;
+	}
 };
 
 module.exports = manager;

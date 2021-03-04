@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.ingrid.mundoanimal.fragments.home.HomeFragment;
 import com.ingrid.mundoanimal.fragments.ProductsFragment;
 import com.ingrid.mundoanimal.fragments.ServicesFragment;
+import com.ingrid.mundoanimal.fragments.products.ProductsCategoriesFragment;
 
 public class TabsAdapter extends FragmentStateAdapter {
     public TabsAdapter(FragmentActivity fragmentActivity) {
@@ -20,7 +21,7 @@ public class TabsAdapter extends FragmentStateAdapter {
         if (position == 0) {
             return new HomeFragment();
         } else if (position == 1) {
-            return new ProductsFragment();
+            return new ProductsCategoriesFragment();
         } else {
             return new ServicesFragment();
         }

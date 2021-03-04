@@ -3,12 +3,11 @@ package com.ingrid.mundoanimal.repositories;
 import android.content.Context;
 
 import com.ingrid.mundoanimal.model.HomeData;
+import com.ingrid.mundoanimal.model.ProductsCategory;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
+import java.util.List;
 
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -27,5 +26,9 @@ public class MundoAnimalRepository {
 
     public void loadHome(Callback<HomeData> callback) {
         server.loadHomeData().enqueue(callback);
+    }
+
+    public void loadProductsCategory(Callback<List<ProductsCategory>> callback) {
+        server.loadProductsCategory().enqueue(callback);
     }
 }

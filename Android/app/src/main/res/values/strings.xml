@@ -12,4 +12,5 @@
     <string name="hint_search">Pesquisa rápida</string>
     <string name="status_loading">Carregando...</string>
     <string name="title_most_wanted">Mais Procurados</string>
+    <string name="message_error_load_data">Não foi possível carregar os dados</string>
 </resources>

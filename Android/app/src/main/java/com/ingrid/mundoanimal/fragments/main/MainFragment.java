@@ -41,6 +41,14 @@ public class MainFragment extends Fragment {
     private void init(View view) {
         TabsAdapter tabsAdapter = new TabsAdapter(requireActivity());
         ViewPager2 viewPager = view.findViewById(R.id.pager);
+
+
+
+        //////////////////////////
+
+
+        ///////////////////////////////////
+//        viewPager.setNestedScrollingEnabled(true);
         viewPager.setAdapter(tabsAdapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);

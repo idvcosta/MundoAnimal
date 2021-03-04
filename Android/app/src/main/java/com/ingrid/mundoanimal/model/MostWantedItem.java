@@ -1,6 +1,6 @@
 package com.ingrid.mundoanimal.model;
 
-public class HomeItem {
+public class MostWantedItem {
     private String name;
     private String price;
     private String image;

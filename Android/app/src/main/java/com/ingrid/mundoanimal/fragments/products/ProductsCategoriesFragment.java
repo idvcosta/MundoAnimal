@@ -1,4 +1,4 @@
-package com.ingrid.mundoanimal.fragments.home;
+package com.ingrid.mundoanimal.fragments.products;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,35 +14,32 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.ingrid.mundoanimal.R;
-import com.ingrid.mundoanimal.adapters.HighlightsAdapter;
-import com.ingrid.mundoanimal.adapters.HomeItemsAdapter;
+import com.ingrid.mundoanimal.adapters.ProductsCategoriesAdapter;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
-public class HomeFragment extends Fragment {
+public class ProductsCategoriesFragment extends Fragment {
     private SearchView seach;
     private ProgressBar progressBar;
     private TextView tvStatus;
-    private RecyclerView rvItems;
-    private HomeViewModel homeViewModel;
-    private ViewPager2 vpHighlights;
+    private RecyclerView rvProductsCategories;
+    private ProductsViewModel productsViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        homeViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+        View view = inflater.inflate(R.layout.fragment_products_categories, container, false);
+        productsViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
                 MundoAnimalRepository repository = new MundoAnimalRepository(requireContext());
-                return (T) new HomeViewModel(repository);
+                return (T) new ProductsViewModel(repository);
             }
-        }).get(HomeViewModel.class);
+        }).get(ProductsViewModel.class);
 
         initViews(view);
         initObserves();
@@ -54,25 +51,23 @@ public class HomeFragment extends Fragment {
         seach = view.findViewById(R.id.search);
         progressBar = view.findViewById(R.id.progressBar);
         tvStatus = view.findViewById(R.id.tvStatus);
-        rvItems = view.findViewById(R.id.rvItems);
-        vpHighlights = view.findViewById(R.id.vpHighlights);
-
+        rvProductsCategories = view.findViewById(R.id.rvProductsCategories);
     }
 
     private void initObserves() {
-        homeViewModel.getState().observe(getViewLifecycleOwner(), state -> {
+        productsViewModel.getState().observe(getViewLifecycleOwner(), state -> {
             switch (state) {
                 case LOADING_INITIAL_DATA:
                 case SEARCHING:
                     progressBar.setVisibility(View.VISIBLE);
                     tvStatus.setVisibility(View.VISIBLE);
-                    rvItems.setVisibility(View.GONE);
+                    rvProductsCategories.setVisibility(View.GONE);
                     break;
                 case INITIAL_DATA_LOADED:
                 case SHOW_SEARCH_RESULTS:
                     progressBar.setVisibility(View.GONE);
                     tvStatus.setVisibility(View.GONE);
-                    rvItems.setVisibility(View.VISIBLE);
+                    rvProductsCategories.setVisibility(View.VISIBLE);
                     break;
                 case LOAD_INITIAL_DATA_ERROR:
                     progressBar.setVisibility(View.GONE);
@@ -81,18 +76,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        homeViewModel.getMostWanted().observe(getViewLifecycleOwner(), homeItems -> {
-            HomeItemsAdapter adapter = new HomeItemsAdapter();
-            rvItems.setAdapter(adapter);
+        productsViewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
+            ProductsCategoriesAdapter adapter = new ProductsCategoriesAdapter();
+            rvProductsCategories.setAdapter(adapter);
 
-            adapter.updateItems(homeItems);
-        });
-
-        homeViewModel.getHightlight().observe(getViewLifecycleOwner(), highlightItems -> {
-            HighlightsAdapter adapter = new HighlightsAdapter();
-            vpHighlights.setAdapter(adapter);
-
-            adapter.updateHighlights(highlightItems);
+            adapter.updateCategories(categories);
         });
     }
 }
