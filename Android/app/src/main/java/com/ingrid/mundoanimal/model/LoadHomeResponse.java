@@ -2,7 +2,7 @@ package com.ingrid.mundoanimal.model;
 
 import java.util.List;
 
-public class HomeData {
+public class LoadHomeResponse {
     private List<Product> mostWanted;
     private List<HighlightItem> highlights;
 

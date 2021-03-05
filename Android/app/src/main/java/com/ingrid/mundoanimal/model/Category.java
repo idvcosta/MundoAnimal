@@ -1,6 +1,6 @@
 package com.ingrid.mundoanimal.model;
 
-public class ProductsCategory {
+public class Category {
     private int id;
     private String name;
 

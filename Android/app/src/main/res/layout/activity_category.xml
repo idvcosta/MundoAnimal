@@ -16,6 +16,6 @@
 
     <include layout="@layout/content_progress" />
 
-    <include layout="@layout/content_products" />
+    <include layout="@layout/content_category" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

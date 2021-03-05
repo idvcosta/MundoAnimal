@@ -1,4 +1,4 @@
-package com.ingrid.mundoanimal.fragments.products;
+package com.ingrid.mundoanimal.fragments.categorieslist;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,18 +17,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ingrid.mundoanimal.R;
-import com.ingrid.mundoanimal.activities.ProductActivity;
-import com.ingrid.mundoanimal.adapters.CategorySelectedListener;
-import com.ingrid.mundoanimal.adapters.ProductsCategoriesAdapter;
-import com.ingrid.mundoanimal.model.ProductsCategory;
+import com.ingrid.mundoanimal.activities.category.CategoryDetailsActivity;
+import com.ingrid.mundoanimal.adapters.CategoriesAdapter;
+import com.ingrid.mundoanimal.model.Category;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
-public class ProductsCategoriesFragment extends Fragment {
+public class CategoriesListFragment extends Fragment {
     private SearchView seach;
     private ProgressBar progressBar;
     private TextView tvStatus;
     private RecyclerView rvProductsCategories;
-    private ProductsViewModel productsViewModel;
+    private CategoriesListViewModel categoriesListViewModel;
 
     @Nullable
     @Override
@@ -36,14 +35,14 @@ public class ProductsCategoriesFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products_categories, container, false);
-        productsViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+        categoriesListViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
                 MundoAnimalRepository repository = new MundoAnimalRepository(requireContext());
-                return (T) new ProductsViewModel(repository);
+                return (T) new CategoriesListViewModel(repository);
             }
-        }).get(ProductsViewModel.class);
+        }).get(CategoriesListViewModel.class);
 
         initViews(view);
         initObserves();
@@ -59,7 +58,7 @@ public class ProductsCategoriesFragment extends Fragment {
     }
 
     private void initObserves() {
-        productsViewModel.getState().observe(getViewLifecycleOwner(), state -> {
+        categoriesListViewModel.getState().observe(getViewLifecycleOwner(), state -> {
             switch (state) {
                 case LOADING_INITIAL_DATA:
                 case SEARCHING:
@@ -80,17 +79,17 @@ public class ProductsCategoriesFragment extends Fragment {
             }
         });
 
-        productsViewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
-            ProductsCategoriesAdapter adapter = new ProductsCategoriesAdapter(this::onCategorySelected);
+        categoriesListViewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
+            CategoriesAdapter adapter = new CategoriesAdapter(this::onCategorySelected);
             rvProductsCategories.setAdapter(adapter);
 
             adapter.updateCategories(categories);
         });
     }
 
-    public void onCategorySelected(ProductsCategory category) {
-        Intent intent = new Intent(requireContext(), ProductActivity.class);
-        intent.putExtra(ProductActivity.PARAM_ID, category.getId());
+    public void onCategorySelected(Category category) {
+        Intent intent = new Intent(requireContext(), CategoryDetailsActivity.class);
+        intent.putExtra(CategoryDetailsActivity.PARAM_ID, category.getId());
         startActivity(intent);
     }
 }

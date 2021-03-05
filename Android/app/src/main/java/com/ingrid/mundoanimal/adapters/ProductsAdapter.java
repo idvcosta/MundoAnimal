@@ -15,15 +15,15 @@ import com.ingrid.mundoanimal.model.Product;
 
 import java.util.List;
 
-public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.HomeItemHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductHolder> {
 
-    public class HomeItemHolder extends RecyclerView.ViewHolder {
+    public class ProductHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvTitle;
         private final TextView tvPrice;
         private final ImageView ivItem;
 
-        public HomeItemHolder(@NonNull View itemView) {
+        public ProductHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvTitle);
@@ -32,20 +32,20 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         }
     }
 
-    private List<Product> mostWantedItems;
+    private List<Product> products;
 
     @NonNull
     @Override
-    public HomeItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row_home_item, parent, false);
 
-        return new HomeItemHolder(view);
+        return new ProductHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeItemHolder holder, int position) {
-        Product product = mostWantedItems.get(position);
+    public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
+        Product product = products.get(position);
 
         holder.tvTitle.setText(product.getName());
         holder.tvPrice.setText(product.getPrice());
@@ -59,11 +59,11 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
     @Override
     public int getItemCount() {
-        return mostWantedItems == null ? 0 : mostWantedItems.size();
+        return products == null ? 0 : products.size();
     }
 
-    public void updateItems(List<Product> mostWantedItems) {
-        this.mostWantedItems = mostWantedItems;
+    public void updateItems(List<Product> products) {
+        this.products = products;
         notifyDataSetChanged();
     }
 }

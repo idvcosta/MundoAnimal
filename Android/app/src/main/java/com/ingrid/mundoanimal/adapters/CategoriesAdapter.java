@@ -9,19 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ingrid.mundoanimal.R;
-import com.ingrid.mundoanimal.model.ProductsCategory;
+import com.ingrid.mundoanimal.model.Category;
 
 import java.util.List;
 
-public class ProductsCategoriesAdapter extends RecyclerView.Adapter<ProductsCategoriesAdapter.ProductsCategoriesHolder> {
+public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryHolder> {
 
     private CategorySelectedListener listener;
 
-    public class ProductsCategoriesHolder extends RecyclerView.ViewHolder {
+    public class CategoryHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvCategoryName;
 
-        public ProductsCategoriesHolder(@NonNull View itemView) {
+        public CategoryHolder(@NonNull View itemView) {
             super(itemView);
 
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
@@ -29,28 +29,28 @@ public class ProductsCategoriesAdapter extends RecyclerView.Adapter<ProductsCate
 
     }
 
-    private List<ProductsCategory> productsCategories;
+    private List<Category> productsCategories;
 
-    public ProductsCategoriesAdapter(CategorySelectedListener listener) {
+    public CategoriesAdapter(CategorySelectedListener listener) {
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ProductsCategoriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row_product_category, parent, false);
         view.setOnClickListener(source -> {
-            ProductsCategory category = (ProductsCategory) source.getTag();
+            Category category = (Category) source.getTag();
             listener.onCategorySelected(category);
         });
 
-        return new ProductsCategoriesHolder(view);
+        return new CategoryHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductsCategoriesHolder holder, int position) {
-        ProductsCategory category = productsCategories.get(position);
+    public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
+        Category category = productsCategories.get(position);
 
         holder.tvCategoryName.setText(category.getName());
         holder.itemView.setTag(category);
@@ -61,7 +61,7 @@ public class ProductsCategoriesAdapter extends RecyclerView.Adapter<ProductsCate
         return productsCategories == null ? 0 : productsCategories.size();
     }
 
-    public void updateCategories(List<ProductsCategory> categories) {
+    public void updateCategories(List<Category> categories) {
         this.productsCategories = categories;
         notifyDataSetChanged();
     }

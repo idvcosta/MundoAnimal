@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MundoAnimal">
-        <activity android:name=".activities.ProductActivity"></activity>
+        <activity android:name=".activities.category.CategoryDetailsActivity"></activity>
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

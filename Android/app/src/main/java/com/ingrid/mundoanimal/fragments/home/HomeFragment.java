@@ -18,7 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.ingrid.mundoanimal.R;
 import com.ingrid.mundoanimal.adapters.HighlightsAdapter;
-import com.ingrid.mundoanimal.adapters.HomeItemsAdapter;
+import com.ingrid.mundoanimal.adapters.ProductsAdapter;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 public class HomeFragment extends Fragment {
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         });
 
         homeViewModel.getMostWanted().observe(getViewLifecycleOwner(), homeItems -> {
-            HomeItemsAdapter adapter = new HomeItemsAdapter();
+            ProductsAdapter adapter = new ProductsAdapter();
             rvItems.setAdapter(adapter);
 
             adapter.updateItems(homeItems);

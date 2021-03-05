@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.ingrid.mundoanimal.fragments.FragmentStates;
 import com.ingrid.mundoanimal.model.HighlightItem;
-import com.ingrid.mundoanimal.model.HomeData;
+import com.ingrid.mundoanimal.model.LoadHomeResponse;
 import com.ingrid.mundoanimal.model.Product;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
@@ -36,18 +37,18 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void loadData() {
-        repository.loadHome(new Callback<HomeData>() {
+        repository.loadHome(new Callback<LoadHomeResponse>() {
             @Override
-            public void onResponse(Call<HomeData> call, Response<HomeData> response) {
-                HomeData homeData = response.body();
+            public void onResponse(Call<LoadHomeResponse> call, Response<LoadHomeResponse> response) {
+                LoadHomeResponse loadHomeResponse = response.body();
 
                 mutableState.postValue(FragmentStates.INITIAL_DATA_LOADED);
-                mutableMostWanted.postValue(homeData.getMostWanted());
-                mutableHighlight.postValue(homeData.getHighlights());
+                mutableMostWanted.postValue(loadHomeResponse.getMostWanted());
+                mutableHighlight.postValue(loadHomeResponse.getHighlights());
             }
 
             @Override
-            public void onFailure(Call<HomeData> call, Throwable cause) {
+            public void onFailure(Call<LoadHomeResponse> call, Throwable cause) {
                 Log.e("HomeViewModel", "erro loading HomeData", cause);
                 mutableState.postValue(FragmentStates.LOAD_INITIAL_DATA_ERROR);
             }

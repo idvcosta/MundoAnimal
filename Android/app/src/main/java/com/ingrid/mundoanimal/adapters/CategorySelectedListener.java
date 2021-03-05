@@ -1,7 +1,7 @@
 package com.ingrid.mundoanimal.adapters;
 
-import com.ingrid.mundoanimal.model.ProductsCategory;
+import com.ingrid.mundoanimal.model.Category;
 
 public interface CategorySelectedListener {
-    void onCategorySelected(ProductsCategory category);
+    void onCategorySelected(Category category);
 }
