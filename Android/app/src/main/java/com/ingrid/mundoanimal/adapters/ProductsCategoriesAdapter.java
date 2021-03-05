@@ -15,6 +15,8 @@ import java.util.List;
 
 public class ProductsCategoriesAdapter extends RecyclerView.Adapter<ProductsCategoriesAdapter.ProductsCategoriesHolder> {
 
+    private CategorySelectedListener listener;
+
     public class ProductsCategoriesHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvCategoryName;
@@ -29,19 +31,29 @@ public class ProductsCategoriesAdapter extends RecyclerView.Adapter<ProductsCate
 
     private List<ProductsCategory> productsCategories;
 
+    public ProductsCategoriesAdapter(CategorySelectedListener listener) {
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public ProductsCategoriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row_product_category, parent, false);
+        view.setOnClickListener(source -> {
+            ProductsCategory category = (ProductsCategory) source.getTag();
+            listener.onCategorySelected(category);
+        });
 
         return new ProductsCategoriesHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductsCategoriesHolder holder, int position) {
-        ProductsCategory categoriesItems = productsCategories.get(position);
-        holder.tvCategoryName.setText(categoriesItems.getName());
+        ProductsCategory category = productsCategories.get(position);
+
+        holder.tvCategoryName.setText(category.getName());
+        holder.itemView.setTag(category);
     }
 
     @Override

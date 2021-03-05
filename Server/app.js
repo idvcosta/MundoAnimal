@@ -21,7 +21,7 @@ app.get('/productsCategories', (req,res) => {
 //productsByCategory?categoryId=10
 app.get('/productsByCategory', (req,res) => {
 	var id = req.query.categoryId;
-	res.send(manager.getProducts(id));
+	res.send(manager.getProductsByCategory(id));
 });
 
 //product?id=4172

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ingrid.mundoanimal.R;
-import com.ingrid.mundoanimal.model.MostWantedItem;
+import com.ingrid.mundoanimal.model.Product;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         }
     }
 
-    private List<MostWantedItem> mostWantedItems;
+    private List<Product> mostWantedItems;
 
     @NonNull
     @Override
@@ -45,14 +45,14 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
     @Override
     public void onBindViewHolder(@NonNull HomeItemHolder holder, int position) {
-        MostWantedItem mostWantedItem = mostWantedItems.get(position);
+        Product product = mostWantedItems.get(position);
 
-        holder.tvTitle.setText(mostWantedItem.getName());
-        holder.tvPrice.setText(mostWantedItem.getPrice());
+        holder.tvTitle.setText(product.getName());
+        holder.tvPrice.setText(product.getPrice());
         //////////////////
         Glide
                 .with(holder.itemView.getContext())
-                .load("https://mundo-animal-server.appspot.com/"+ mostWantedItem.getImage())
+                .load("https://mundo-animal-server.appspot.com/"+ product.getImage())
                 .into(holder.ivItem);
 
     }
@@ -62,7 +62,7 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         return mostWantedItems == null ? 0 : mostWantedItems.size();
     }
 
-    public void updateItems(List<MostWantedItem> mostWantedItems) {
+    public void updateItems(List<Product> mostWantedItems) {
         this.mostWantedItems = mostWantedItems;
         notifyDataSetChanged();
     }

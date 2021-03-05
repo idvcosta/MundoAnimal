@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MundoAnimal">
+        <activity android:name=".activities.ProductActivity"></activity>
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -21,11 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity" android:theme="@style/Theme.MundoAnimal.NoActionBar"/>
-
-        <activity android:name=".activities.HelpActivity"/>
+            android:name=".activities.MainActivity"
+            android:theme="@style/Theme.MundoAnimal.NoActionBar" />
+        <activity android:name=".activities.HelpActivity" />
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.ProfileActivity" android:label="@string/menu_profile" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/menu_profile" />
     </application>
 
 </manifest>

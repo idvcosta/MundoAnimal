@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.ingrid.mundoanimal.model.HighlightItem;
 import com.ingrid.mundoanimal.model.HomeData;
-import com.ingrid.mundoanimal.model.MostWantedItem;
+import com.ingrid.mundoanimal.model.Product;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<FragmentStates> mutableState;
-    private MutableLiveData<List<MostWantedItem>> mutableMostWanted;
+    private MutableLiveData<List<Product>> mutableMostWanted;
     private MutableLiveData<List<HighlightItem>> mutableHighlight;
     private MundoAnimalRepository repository;
 
@@ -58,7 +58,7 @@ public class HomeViewModel extends ViewModel {
         return mutableState;
     }
 
-    public MutableLiveData<List<MostWantedItem>> getMostWanted() {
+    public MutableLiveData<List<Product>> getMostWanted() {
         return mutableMostWanted;
     }
 

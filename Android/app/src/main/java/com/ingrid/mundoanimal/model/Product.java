@@ -1,9 +1,14 @@
 package com.ingrid.mundoanimal.model;
 
-public class MostWantedItem {
+public class Product {
+    private int id;
     private String name;
     private String price;
     private String image;
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

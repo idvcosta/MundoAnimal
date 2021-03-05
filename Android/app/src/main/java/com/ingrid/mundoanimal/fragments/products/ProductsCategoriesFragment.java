@@ -1,5 +1,6 @@
 package com.ingrid.mundoanimal.fragments.products;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ingrid.mundoanimal.R;
+import com.ingrid.mundoanimal.activities.ProductActivity;
+import com.ingrid.mundoanimal.adapters.CategorySelectedListener;
 import com.ingrid.mundoanimal.adapters.ProductsCategoriesAdapter;
+import com.ingrid.mundoanimal.model.ProductsCategory;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 public class ProductsCategoriesFragment extends Fragment {
@@ -77,10 +81,16 @@ public class ProductsCategoriesFragment extends Fragment {
         });
 
         productsViewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
-            ProductsCategoriesAdapter adapter = new ProductsCategoriesAdapter();
+            ProductsCategoriesAdapter adapter = new ProductsCategoriesAdapter(this::onCategorySelected);
             rvProductsCategories.setAdapter(adapter);
 
             adapter.updateCategories(categories);
         });
+    }
+
+    public void onCategorySelected(ProductsCategory category) {
+        Intent intent = new Intent(requireContext(), ProductActivity.class);
+        intent.putExtra(ProductActivity.PARAM_ID, category.getId());
+        startActivity(intent);
     }
 }
