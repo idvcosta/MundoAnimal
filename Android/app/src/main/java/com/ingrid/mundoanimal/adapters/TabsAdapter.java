@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.ingrid.mundoanimal.fragments.home.HomeFragment;
-import com.ingrid.mundoanimal.fragments.ServicesFragment;
+import com.ingrid.mundoanimal.fragments.services.ServicesFragment;
 import com.ingrid.mundoanimal.fragments.categorieslist.CategoriesListFragment;
 
 public class TabsAdapter extends FragmentStateAdapter {

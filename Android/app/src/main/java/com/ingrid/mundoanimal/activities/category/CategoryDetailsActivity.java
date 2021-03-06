@@ -1,8 +1,6 @@
 package com.ingrid.mundoanimal.activities.category;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,17 +12,17 @@ import android.widget.TextView;
 
 import com.ingrid.mundoanimal.R;
 import com.ingrid.mundoanimal.adapters.ProductsAdapter;
-import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
+import com.ingrid.mundoanimal.util.MundoAnimalViewModelProvider;
 
 public class CategoryDetailsActivity extends AppCompatActivity {
 
     public static final String PARAM_ID = "paramCategoryId";
 
-    private SearchView seach;
+    private SearchView search;
     private ProgressBar progressBar;
     private TextView tvStatus;
     private RecyclerView rvItems;
-    private CategoryViewModel categoryViewModel;
+    private CategoryDetailsViewModel categoryDetailsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        seach = findViewById(R.id.search);
+        search = findViewById(R.id.search);
         progressBar = findViewById(R.id.progressBar);
         tvStatus = findViewById(R.id.tvStatus);
         rvItems = findViewById(R.id.rvItems);
@@ -47,7 +45,7 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     }
 
     private void initObserves() {
-        categoryViewModel.getState().observe(this, state -> {
+        categoryDetailsViewModel.getState().observe(this, state -> {
             switch (state) {
                 case LOADING_INITIAL_DATA:
                 case SEARCHING:
@@ -68,7 +66,7 @@ public class CategoryDetailsActivity extends AppCompatActivity {
             }
         });
 
-        categoryViewModel.getProducts().observe(this, products -> {
+        categoryDetailsViewModel.getProducts().observe(this, products -> {
             ProductsAdapter adapter = new ProductsAdapter();
             rvItems.setAdapter(adapter);
 
@@ -77,13 +75,8 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     }
 
     private void initViewModel(int categoryId) {
-        categoryViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
-            @NonNull
-            @Override
-            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                MundoAnimalRepository repository = new MundoAnimalRepository(CategoryDetailsActivity.this);
-                return (T) new CategoryViewModel(repository, categoryId);
-            }
-        }).get(CategoryViewModel.class);
+        categoryDetailsViewModel = new ViewModelProvider(this, new MundoAnimalViewModelProvider(this, categoryId))
+                .get(CategoryDetailsViewModel.class);
+        categoryDetailsViewModel.loadData();
     }
 }

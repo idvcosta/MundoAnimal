@@ -18,16 +18,10 @@ import com.ingrid.mundoanimal.adapters.TabsAdapter;
 
 public class MainFragment extends Fragment {
 
-    private MainViewModel mainViewModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        mainViewModel.getText().observe(getViewLifecycleOwner(), text -> {
-        });
 
         return view;
     }
@@ -41,7 +35,6 @@ public class MainFragment extends Fragment {
     private void init(View view) {
         TabsAdapter tabsAdapter = new TabsAdapter(requireActivity());
         ViewPager2 viewPager = view.findViewById(R.id.pager);
-
 
 
         //////////////////////////

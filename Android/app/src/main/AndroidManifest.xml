@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MundoAnimal">
-        <activity android:name=".activities.category.CategoryDetailsActivity"></activity>
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -21,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.category.CategoryDetailsActivity"/>
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/Theme.MundoAnimal.NoActionBar" />

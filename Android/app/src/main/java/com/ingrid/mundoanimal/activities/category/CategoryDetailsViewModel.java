@@ -10,6 +10,7 @@ import com.ingrid.mundoanimal.fragments.FragmentStates;
 import com.ingrid.mundoanimal.model.LoadCategoryResponse;
 import com.ingrid.mundoanimal.model.Product;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
+import com.ingrid.mundoanimal.util.BaseViewModel;
 
 import java.util.List;
 
@@ -18,23 +19,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CategoryViewModel extends ViewModel {
-    private final MutableLiveData<FragmentStates> mutableState;
+public class CategoryDetailsViewModel extends BaseViewModel {
     private final MutableLiveData<List<Product>> mutableProducts;
-    private MundoAnimalRepository repository;
+    private int categoryId;
 
-    public CategoryViewModel(MundoAnimalRepository repository, int categoryId) {
-        this.repository = repository;
-        mutableState = new MutableLiveData<>();
+    public CategoryDetailsViewModel(MundoAnimalRepository repository, int categoryId) {
+        super(repository);
+        this.categoryId = categoryId;
         mutableProducts = new MutableLiveData<>();
-
-        mutableState.setValue(FragmentStates.LOADING_INITIAL_DATA);
-
-        loadData(categoryId);
     }
 
-    private void loadData(int categoryId) {
-        repository.loadCategory(categoryId, new Callback<LoadCategoryResponse>(){
+    @Override
+    protected void loadData() {
+        repository.loadCategory(categoryId, new Callback<LoadCategoryResponse>() {
 
             @Override
             public void onResponse(Call<LoadCategoryResponse> call, Response<LoadCategoryResponse> response) {

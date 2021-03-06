@@ -1,4 +1,4 @@
-package com.ingrid.mundoanimal.fragments;
+package com.ingrid.mundoanimal.fragments.services;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
