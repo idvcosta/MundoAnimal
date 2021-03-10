@@ -25,7 +25,7 @@ const home = {
 	mostWanted: [
 		createProduct(10, "Coleira","R$ 15","img/coleira.jpg"), 
 		createProduct(1, "Ração para cão","R$ 35","img/racao.jpg"), 
-		createProduct(15,"Banho","R$ 40","img/banhoetosa.png")],
+		createService(4,"Banho","R$ 40","img/banhoetosa.png")],
 	highlights:[
 		createHighlight(HighlightTypes.SALE, "Confira nossas promoções", 1),
 		createHighlight(HighlightTypes.NEWS, "Agora fazemos castração", 14),
@@ -84,7 +84,67 @@ productsByCategory[4] =
 };
 //products
 
+//services
+function createService(id, name, price, image){
+	return {
+		id:id,
+		name:name, 
+		price:price,
+		image:image
+	};
+}
 
+const services = [
+	createService(1, "Nutricionista", "R$ 100","img/vet_female.PNG"),
+	createService(2, "Veterinário", "R$ 160", "img/vet_male.PNG"),
+	createService(3, "Dog Walker", "R$ 50","img/dog_walker.PNG"),
+	createService(4, "Banho","R$ 40","img/banhoetosa.png"),
+	createService(5, "Escovação de dentes","R$ 30", "img/escovacao_dente.PNG"),
+	createService(6, "Aculputura animal", "R$ 60","img/cao_aculputura.jpg"),
+	createService(7, "Adestramento", "R$ 100","img/adestramento.PNG"),
+	createService(8, "Creche", "R$ 80","img/Creche.PNG"),
+	createService(9, "Hotel", "R$ 140","img/Hotel.PNG"),
+	createService(10,"Taxi", "R$ 50","img/taxi_pet.PNG")
+];
+
+//const servicesCategories = [
+//	{id: 1, name: "Serviços médicos"},
+//	{id: 2, name: "Estética e bem-estar"},
+//	{id: 3, name: "Educação e Transporte"}
+//];
+
+//const servicesByCategory = {}
+//servicesByCategory[1] = 
+//{
+//	name: "Serviços médicos",
+//	services: [
+//		createService(1, "Dra. Rosa", "R$ 150","img/vet_female.PNG"),
+//		createService(2, "Dr. John", "R$ 160", "img/vet_male.PNG"),
+//		createService(3, "Dra. Maria","R$ 100", "img/vet_female2.PNG"),
+//		createService(4, "Dr. Bill", "R$ 35","img/vet_male2.PNG")
+//	]
+//};
+//servicesByCategory[2] = 
+//{
+//	name: "Estética e bem-estar",
+//	services: [
+//		createService(5, "Dog Walker", "R$ 50","img/dog_walker.PNG"),
+//		createService(6, "Banho","R$ 40","img/banhoetosa.png"),
+//		createService(7, "Escovação de dentes","R$ 30", "img/escovacao_dente.PNG"),
+//		createService(8, "Aculputura animal", "R$ 60","img/cao_aculputura.jpg")
+//	]
+//};
+//servicesByCategory[3] = 
+//{
+//	name:"Educação e Transporte",
+//	services: [
+//		createService(9, "Adestramento", "R$ 100","img/adestramento.PNG"),
+//		createService(10, "Creche", "R$ 80","img/Creche.PNG"),
+//		createService(11, "Hotel", "R$ 140","img/Hotel.PNG"),
+//		createService(12, "Taxi", "R$ 50","img/taxi_pet.PNG")
+//	]
+//};
+//services
 
 const manager = {
     createHomeData: function () {
@@ -95,7 +155,17 @@ const manager = {
 	},
 	getProductsByCategory: function(id){
 		return productsByCategory[id];
+	},
+	//getServicesCategories: function(){
+	//	return servicesCategories;
+	//},
+	//getServicesByCategory: function(id){
+	//	return servicesByCategory;
+	//}
+	getServices: function(){
+		return services;
 	}
+	
 };
 
 module.exports = manager;

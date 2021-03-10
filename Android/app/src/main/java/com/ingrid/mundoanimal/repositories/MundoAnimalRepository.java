@@ -5,6 +5,8 @@ import android.content.Context;
 import com.ingrid.mundoanimal.model.LoadCategoryResponse;
 import com.ingrid.mundoanimal.model.LoadHomeResponse;
 import com.ingrid.mundoanimal.model.Category;
+import com.ingrid.mundoanimal.model.LoadServiceResponse;
+import com.ingrid.mundoanimal.model.Services;
 
 import java.util.List;
 
@@ -46,5 +48,9 @@ public class MundoAnimalRepository {
 
     public void loadCategory(int categoryId, Callback<LoadCategoryResponse> callback) {
         server.loadProductsByCategory(categoryId).enqueue(callback);
+    }
+
+    public void loadServices(Callback<List<Services>> callback) {
+        server.loadServiceData().enqueue(callback);
     }
 }

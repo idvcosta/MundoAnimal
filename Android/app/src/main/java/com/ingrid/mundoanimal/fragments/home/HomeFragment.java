@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +22,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel> {
 
     private RecyclerView rvItems;
     private ViewPager2 vpHighlights;
+    private TextView tvMostWantedHeader;
 
     @Nullable
     @Override
@@ -46,6 +45,19 @@ public class HomeFragment extends BaseFragment<HomeViewModel> {
         super.initViews(view);
         rvItems = view.findViewById(R.id.rvItems);
         vpHighlights = view.findViewById(R.id.vpHighlights);
+        tvMostWantedHeader = view.findViewById(R.id.tvMostWantedHeader);
+    }
+
+    @Override
+    protected void showLoading() {
+        super.showLoading();
+        tvMostWantedHeader.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void showLoaded() {
+        super.showLoaded();
+        tvMostWantedHeader.setVisibility(View.VISIBLE);
     }
 
     @Override

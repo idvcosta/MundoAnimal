@@ -28,15 +28,11 @@ public abstract class BaseFragment<ViewModelType extends BaseViewModel> extends 
             switch (state) {
                 case LOADING_INITIAL_DATA:
                 case SEARCHING:
-                    progressBar.setVisibility(View.VISIBLE);
-                    tvStatus.setVisibility(View.VISIBLE);
-                    getListView().setVisibility(View.GONE);
+                    showLoading();
                     break;
                 case INITIAL_DATA_LOADED:
                 case SHOW_SEARCH_RESULTS:
-                    progressBar.setVisibility(View.GONE);
-                    tvStatus.setVisibility(View.GONE);
-                    getListView().setVisibility(View.VISIBLE);
+                    showLoaded();
                     break;
                 case LOAD_INITIAL_DATA_ERROR:
                     progressBar.setVisibility(View.GONE);
@@ -44,6 +40,18 @@ public abstract class BaseFragment<ViewModelType extends BaseViewModel> extends 
                     break;
             }
         });
+    }
+
+    protected void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+        tvStatus.setVisibility(View.VISIBLE);
+        getListView().setVisibility(View.GONE);
+    }
+
+    protected void showLoaded() {
+        progressBar.setVisibility(View.GONE);
+        tvStatus.setVisibility(View.GONE);
+        getListView().setVisibility(View.VISIBLE);
     }
 
     public abstract View getListView();

@@ -14,6 +14,7 @@ app.get('/home', (req, res) => {
     res.send(manager.createHomeData());
 });
 
+//productsCategories
 app.get('/productsCategories', (req,res) => {
 	res.send(manager.getProductsCategories());
 });
@@ -28,6 +29,22 @@ app.get('/productsByCategory', (req,res) => {
 app.get('/product', (req,res) => {
 	var id = req.query.id;
 	res.send(manager.getProduct(id));
+});
+
+//servicesCategories
+//app.get('/servicesCategories', (req,res) =>{
+//	res.send(manager.getServicesCategories());
+//});
+
+//servicesByCategory?categoryId=10
+//app.get('/servicesByCategory', (req,res) => {
+//	var id = req.query.categoryId;
+//	res.send(manager.getServicesByCategory(id));
+//});
+
+//servico
+app.get('/servicos', (req,res) => {
+	res.send(manager.getServices());
 });
 
 // Start the server

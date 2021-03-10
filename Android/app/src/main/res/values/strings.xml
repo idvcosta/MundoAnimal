@@ -5,10 +5,10 @@
 
     <string name="menu_profile">Perfil</string>
     <string name="menu_settings">Configurações</string>
+    <string name="menu_help">Ajuda</string>
     <string name="tab_text_home">Início</string>
     <string name="tab_text_products">Produtos</string>
     <string name="tab_text_services">Serviços</string>
-    <string name="menu_help">Ajuda</string>
     <string name="hint_search">Pesquisa rápida</string>
     <string name="status_loading">Carregando...</string>
     <string name="title_most_wanted">Mais Procurados</string>

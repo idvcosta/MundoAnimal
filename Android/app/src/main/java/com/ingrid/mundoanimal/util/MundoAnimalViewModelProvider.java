@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ingrid.mundoanimal.activities.category.CategoryDetailsViewModel;
 import com.ingrid.mundoanimal.fragments.categorieslist.CategoriesListViewModel;
 import com.ingrid.mundoanimal.fragments.home.HomeViewModel;
+import com.ingrid.mundoanimal.fragments.services.ServicesViewModel;
 import com.ingrid.mundoanimal.repositories.MundoAnimalRepository;
 
 public class MundoAnimalViewModelProvider implements ViewModelProvider.Factory {
@@ -36,8 +37,10 @@ public class MundoAnimalViewModelProvider implements ViewModelProvider.Factory {
             return (T) new CategoriesListViewModel(repository);
         } else if (modelClass == CategoryDetailsViewModel.class) {
             return (T) new CategoryDetailsViewModel(repository, categoryId);
+        } else if (modelClass == ServicesViewModel.class){
+            return (T) new ServicesViewModel(repository);
         }
 
-        return null;
+        throw new IllegalStateException("Not implemented for " + modelClass.getSimpleName());
     }
 }
